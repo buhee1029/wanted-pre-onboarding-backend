@@ -75,6 +75,15 @@ public class JobService {
 		return new JobDetailResponse(job, findCompany(job.getCompany().getId()));
 	}
 
+	@Transactional(readOnly = true)
+	public List<JobResponse> searchJobs(String keyword) {
+		return jobRepository.findAllByKeyword(keyword)
+							.stream()
+							.map(
+								job -> new JobResponse(job, findCompany(job.getCompany().getId())))
+							.collect(Collectors.toList());
+	}
+
 	private Company findCompany(Long id) {
 		return companyRepository.findById(id)
 								.get();

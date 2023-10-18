@@ -2,7 +2,6 @@ package wanted.job.Job.controller;
 
 import java.util.List;
 import javax.validation.Valid;
-import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -10,6 +9,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import wanted.job.Job.dto.JobDetailResponse;
 import wanted.job.Job.dto.JobRequest;
@@ -47,12 +47,17 @@ public class JobController {
 	}
 
 	@GetMapping
-	public ApiResponse<List<JobResponse>> getPosts() {
+	public ApiResponse<List<JobResponse>> getJobs() {
 		return ApiResponse.toResponse(jobService.getJobs());
 	}
 
 	@GetMapping("/{id}")
-	public ApiResponse<JobDetailResponse> getPost(@PathVariable Long id) {
+	public ApiResponse<JobDetailResponse> getJob(@PathVariable Long id) {
 		return ApiResponse.toResponse(jobService.getJobDetail(id));
+	}
+
+	@GetMapping("/search")
+	public ApiResponse<List<JobResponse>> searchJobs(@RequestParam(required = false) String keyword) {
+		return ApiResponse.toResponse(jobService.searchJobs(keyword));
 	}
 }

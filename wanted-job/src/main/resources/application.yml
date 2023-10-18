@@ -1,4 +1,8 @@
 spring:
+  mvc:
+    pathmatch:
+      matching-strategy: ant_path_matcher
+
   datasource:
     url: jdbc:mysql://localhost:3306/wanted_job?serverTimezone=Asia/Seoul&useUniCode=yes&characterEncoding=UTF-8
     username: root

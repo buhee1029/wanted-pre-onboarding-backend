@@ -26,7 +26,7 @@ public class Company {
 	private String region;
 
 	@OneToMany(mappedBy = "company", cascade = CascadeType.ALL)
-	private List<Job> jobList = new ArrayList<>();
+	private List<Job> jobs = new ArrayList<>();
 
 	protected Company() {
 	}
@@ -40,6 +40,6 @@ public class Company {
 	}
 
 	public void addJob(Job job) {
-		this.getJobList().add(job);
+		this.getJobs().add(job);
 	}
 }
